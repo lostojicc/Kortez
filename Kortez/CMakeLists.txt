@@ -3,8 +3,8 @@
 #
 
 set(SOURCES
-    src/Core/Application.h
-    src/Core/Application.cpp
+    src/Kortez/Application.h
+    src/Kortez/Application.cpp
 )
 
 add_library(Kortez STATIC)
