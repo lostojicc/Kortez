@@ -13,8 +13,17 @@ set(SOURCES
     src/Kortez/Renderer/RenderCommand.h
     src/Kortez/Renderer/RenderCommand.cpp
     src/Kortez/Renderer/RendererAPI.h
+    src/Kortez/Renderer/VertexArray.h
+    src/Kortez/Renderer/VertexBuffer.h
+    src/Kortez/Renderer/IndexBuffer.h
     src/Kortez/Renderer/OpenGL/OpenGLRendererAPI.h
     src/Kortez/Renderer/OpenGL/OpenGLRendererAPI.cpp
+    src/Kortez/Renderer/OpenGL/OpenGLVertexArray.h
+    src/Kortez/Renderer/OpenGL/OpenGLVertexArray.cpp
+    src/Kortez/Renderer/OpenGL/OpenGLVertexBuffer.h
+    src/Kortez/Renderer/OpenGL/OpenGLVertexBuffer.cpp
+    src/Kortez/Renderer/OpenGL/OpenGLIndexBuffer.h
+    src/Kortez/Renderer/OpenGL/OpenGLIndexBuffer.cpp
 )
 
 add_library(Kortez STATIC)

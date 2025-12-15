@@ -1,11 +1,13 @@
 #include "Kortez/Renderer/Renderer.h"
+#include "VertexArray.h"
+#include "Kortez/Renderer/OpenGL/OpenGLVertexArray.h"
+#include "Kortez/Renderer/OpenGL/OpenGLVertexBuffer.h"
+#include "Kortez/Renderer/OpenGL/OpenGLIndexBuffer.h"
 
 #include <glad/gl.h>
 
 namespace Kortez {
-
-    static unsigned int s_VAO = 0;
-    static unsigned int s_VBO = 0;
+    static std::shared_ptr<VertexArray> s_TriangleVAO;
     static unsigned int s_ShaderProgram = 0;
 
     void Renderer::Init() {
@@ -45,28 +47,17 @@ namespace Kortez {
         glDeleteShader(fragmentShader);
 
         float vertices[] = {
-            -0.5f, -0.5f, 0.0f,  
-             0.5f, -0.5f, 0.0f, 
-             0.0f,  0.5f, 0.0f   
+            -0.5f, -0.5f, 0.0f,
+             0.5f, -0.5f, 0.0f,
+             0.0f,  0.5f, 0.0f
         };
 
-        glGenVertexArrays(1, &s_VAO);
-        glGenBuffers(1, &s_VBO);
-
-        glBindVertexArray(s_VAO);
-        glBindBuffer(GL_ARRAY_BUFFER, s_VBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-        glEnableVertexAttribArray(0);
-
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glBindVertexArray(0);
+        s_TriangleVAO = std::make_shared<OpenGLVertexArray>();
+        auto VBO = std::make_shared<OpenGLVertexBuffer>(vertices, sizeof(vertices));
+        s_TriangleVAO->AddVertexBuffer(VBO);
     }
 
     void Renderer::Shutdown() {
-        glDeleteVertexArrays(1, &s_VAO);
-        glDeleteBuffers(1, &s_VBO);
         glDeleteProgram(s_ShaderProgram);
     }
 
@@ -80,7 +71,7 @@ namespace Kortez {
 
     void Renderer::SubmitTriangle() {
         glUseProgram(s_ShaderProgram);
-        glBindVertexArray(s_VAO);
+        s_TriangleVAO->Bind();
         RenderCommand::DrawArrays(3);
     }
 
