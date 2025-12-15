@@ -5,6 +5,16 @@
 set(SOURCES
     src/Kortez/Application.h
     src/Kortez/Application.cpp
+    src/Kortez/Window.h
+    src/Kortez/Window.cpp
+    src/Kortez/Layer.h
+    src/Kortez/Renderer/Renderer.h
+    src/Kortez/Renderer/Renderer.cpp
+    src/Kortez/Renderer/RenderCommand.h
+    src/Kortez/Renderer/RenderCommand.cpp
+    src/Kortez/Renderer/RendererAPI.h
+    src/Kortez/Renderer/OpenGL/OpenGLRendererAPI.h
+    src/Kortez/Renderer/OpenGL/OpenGLRendererAPI.cpp
 )
 
 add_library(Kortez STATIC)

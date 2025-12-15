@@ -3,7 +3,9 @@
 #
 
 set(SOURCES
-    src/main.cpp
+    src/Main.cpp
+    src/AppLayer.h
+    src/AppLayer.cpp
 )
 
 add_executable(Sandbox)
