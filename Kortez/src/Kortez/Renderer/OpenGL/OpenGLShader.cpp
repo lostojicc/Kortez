@@ -46,4 +46,9 @@ namespace Kortez {
 	void OpenGLShader::Unbind() const {
 		glUseProgram(0);
 	}
+
+	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value) {
+		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+		glUniformMatrix4fv(location, 1, GL_FALSE, &value[0][0]);
+	}
 }
