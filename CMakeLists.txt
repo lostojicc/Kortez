@@ -12,3 +12,6 @@ include(Dependencies.cmake)
 # Projects
 add_subdirectory(Kortez)
 add_subdirectory(Sandbox)
+
+# Root
+target_compile_definitions(Kortez PUBLIC KORTEZ_ROOT_DIR="${CMAKE_SOURCE_DIR}")
