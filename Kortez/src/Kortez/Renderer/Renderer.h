@@ -15,6 +15,6 @@ namespace Kortez {
 		static void EndScene();
 
 		static void SubmitTriangle();
-		static void SubmitCube(const glm::mat4& transform);
+		static void SubmitCube(const glm::mat4& transform, const glm::vec3& cameraPos);
 	};
 }

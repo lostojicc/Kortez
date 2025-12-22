@@ -23,9 +23,13 @@ namespace Kortez {
         Bind();
         VBO->Bind();
 
-        // Simple layout: assume position only (3 floats) for now
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (const void*)0);
+        const auto& layout = VBO->GetLayout();
+        uint32_t index = 0;
+
+        for (const auto& element : layout.GetElements()) {
+            glEnableVertexAttribArray(index);
+            glVertexAttribPointer(index++, element.GetComponentCount(), GL_FLOAT, element.Normalized ? GL_TRUE : GL_FALSE, layout.GetStride(), (const void*)(uintptr_t)element.Offset);
+        }
 
         m_VertexBuffers.push_back(VBO);
     }

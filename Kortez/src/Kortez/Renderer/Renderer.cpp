@@ -16,24 +16,49 @@ namespace Kortez {
         s_Shader = Shader::Create("assets/shaders/simple.vert", "assets/shaders/simple.frag");
 
         float vertices[] = {
-        -0.5f, -0.5f,  0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
+            -0.5f, -0.5f,  0.5f,   0.0f,  0.0f,  1.0f,
+            0.5f, -0.5f,  0.5f,   0.0f,  0.0f,  1.0f,
+            0.5f,  0.5f,  0.5f,   0.0f,  0.0f,  1.0f,
+            -0.5f,  0.5f,  0.5f,   0.0f,  0.0f,  1.0f,
 
-        -0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-        -0.5f,  0.5f, -0.5f
+            0.5f, -0.5f, -0.5f,   0.0f,  0.0f, -1.0f,
+            -0.5f, -0.5f, -0.5f,   0.0f,  0.0f, -1.0f,
+            -0.5f,  0.5f, -0.5f,   0.0f,  0.0f, -1.0f,
+            0.5f,  0.5f, -0.5f,   0.0f,  0.0f, -1.0f,
+
+            -0.5f, -0.5f, -0.5f,  -1.0f,  0.0f,  0.0f,
+            -0.5f, -0.5f,  0.5f,  -1.0f,  0.0f,  0.0f,
+            -0.5f,  0.5f,  0.5f,  -1.0f,  0.0f,  0.0f,
+            -0.5f,  0.5f, -0.5f,  -1.0f,  0.0f,  0.0f,
+
+            0.5f, -0.5f,  0.5f,   1.0f,  0.0f,  0.0f,
+            0.5f, -0.5f, -0.5f,   1.0f,  0.0f,  0.0f,
+            0.5f,  0.5f, -0.5f,   1.0f,  0.0f,  0.0f,
+            0.5f,  0.5f,  0.5f,   1.0f,  0.0f,  0.0f,
+
+            -0.5f,  0.5f,  0.5f,   0.0f,  1.0f,  0.0f,
+            0.5f,  0.5f,  0.5f,   0.0f,  1.0f,  0.0f,
+            0.5f,  0.5f, -0.5f,   0.0f,  1.0f,  0.0f,
+            -0.5f,  0.5f, -0.5f,   0.0f,  1.0f,  0.0f,
+
+            -0.5f, -0.5f, -0.5f,   0.0f, -1.0f,  0.0f,
+            0.5f, -0.5f, -0.5f,   0.0f, -1.0f,  0.0f,
+            0.5f, -0.5f,  0.5f,   0.0f, -1.0f,  0.0f,
+            -0.5f, -0.5f,  0.5f,   0.0f, -1.0f,  0.0f
         };
 
         uint32_t indices[] = {
-            0, 1, 2, 2, 3, 0,
-            1, 5, 6, 6, 2, 1,
-            5, 4, 7, 7, 6, 5,
-            4, 0, 3, 3, 7, 4,
-            3, 2, 6, 6, 7, 3,
-            4, 5, 1, 1, 0, 4
+             0,  1,  2,  2,  3,  0, 
+             4,  5,  6,  6,  7,  4,   
+             8,  9, 10, 10, 11,  8,   
+            12, 13, 14, 14, 15, 12,   
+            16, 17, 18, 18, 19, 16,   
+            20, 21, 22, 22, 23, 20    
+        };
+
+        BufferLayout layout = {
+            { ShaderDataType::Float3 },
+            { ShaderDataType::Float3 }
         };
 
         s_CubeVAO = std::make_shared<OpenGLVertexArray>();
@@ -42,6 +67,7 @@ namespace Kortez {
             vertices,
             sizeof(vertices)
         );
+        vbo->SetLayout(layout);
 
         auto ibo = std::make_shared<OpenGLIndexBuffer>(
             indices,
@@ -65,11 +91,12 @@ namespace Kortez {
     void Renderer::EndScene() {
     }
 
-    void Renderer::SubmitCube(const glm::mat4& transform) {
+    void Renderer::SubmitCube(const glm::mat4& transform, const glm::vec3& cameraPos) {
         s_Shader->Bind();
 
         s_Shader->SetMat4("u_ViewProjection", s_ViewProjection);
         s_Shader->SetMat4("u_Model", transform);
+        s_Shader->SetVec3("viewPos", cameraPos);
 
         s_CubeVAO->Bind();
         RenderCommand::DrawIndexed(36);

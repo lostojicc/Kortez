@@ -15,7 +15,7 @@ void AppLayer::OnRender() {
 	glm::mat4 transform = glm::mat4(1.0f);
 	transform = glm::rotate(transform, m_Rotation, glm::vec3(0.0f, 1.0f, 0.0f));
 
-	Kortez::Renderer::SubmitCube(transform);
+	Kortez::Renderer::SubmitCube(transform, m_Camera.GetPosition());
 	Kortez::Renderer::EndScene();
 }
 

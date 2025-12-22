@@ -51,4 +51,9 @@ namespace Kortez {
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniformMatrix4fv(location, 1, GL_FALSE, &value[0][0]);
 	}
+
+	void OpenGLShader::SetVec3(const std::string& name, const glm::vec3& value) {
+		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+		glUniform3fv(location, 1, &value[0]);
+	}
 }

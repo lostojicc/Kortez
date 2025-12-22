@@ -8,7 +8,7 @@ namespace Kortez {
 	class OpenGLVertexBuffer : public VertexBuffer {
 	private:
 		uint32_t m_RendererID;
-		std::vector<float> m_Data;
+		BufferLayout m_Layout;
 
 	public:
 		OpenGLVertexBuffer(float* vertices, uint32_t size);
@@ -17,8 +17,12 @@ namespace Kortez {
 		void Bind() const override;
 		void Unbind() const override;
 
-		const std::vector<float>& GetData() const override {
-			return m_Data;
+		void SetLayout(const BufferLayout& layout) override {
+			m_Layout = layout;
+		}
+
+		const BufferLayout& GetLayout() const override {
+			return m_Layout;
 		}
 	};
 }

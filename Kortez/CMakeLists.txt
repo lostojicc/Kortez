@@ -22,6 +22,8 @@ set(SOURCES
     src/Kortez/Renderer/Shader.cpp
     src/Kortez/Renderer/Camera.h
     src/Kortez/Renderer/Camera.cpp
+    src/Kortez/Renderer/ShaderDataType.h
+    src/Kortez/Renderer/Buffer.h
     src/Kortez/Renderer/OpenGL/OpenGLRendererAPI.h
     src/Kortez/Renderer/OpenGL/OpenGLRendererAPI.cpp
     src/Kortez/Renderer/OpenGL/OpenGLVertexArray.h
