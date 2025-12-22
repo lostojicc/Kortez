@@ -47,13 +47,18 @@ namespace Kortez {
 		glUseProgram(0);
 	}
 
-	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value) {
+	void OpenGLShader::SetInt(const std::string& name, int value) {
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
-		glUniformMatrix4fv(location, 1, GL_FALSE, &value[0][0]);
+		glUniform1i(location, value);
 	}
 
 	void OpenGLShader::SetVec3(const std::string& name, const glm::vec3& value) {
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform3fv(location, 1, &value[0]);
+	}
+
+	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value) {
+		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+		glUniformMatrix4fv(location, 1, GL_FALSE, &value[0][0]);
 	}
 }

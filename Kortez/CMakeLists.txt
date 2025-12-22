@@ -3,6 +3,8 @@
 #
 
 set(SOURCES
+    vendor/stb/stb_image.h
+    vendor/stb/stb_image.cpp
     src/Kortez/Application.h
     src/Kortez/Application.cpp
     src/Kortez/Window.h
@@ -24,6 +26,8 @@ set(SOURCES
     src/Kortez/Renderer/Camera.cpp
     src/Kortez/Renderer/ShaderDataType.h
     src/Kortez/Renderer/Buffer.h
+    src/Kortez/Renderer/Texture.h
+    src/Kortez/Renderer/Texture.cpp
     src/Kortez/Renderer/OpenGL/OpenGLRendererAPI.h
     src/Kortez/Renderer/OpenGL/OpenGLRendererAPI.cpp
     src/Kortez/Renderer/OpenGL/OpenGLVertexArray.h
@@ -34,6 +38,8 @@ set(SOURCES
     src/Kortez/Renderer/OpenGL/OpenGLIndexBuffer.cpp
     src/Kortez/Renderer/OpenGL/OpenGLShader.h
     src/Kortez/Renderer/OpenGL/OpenGLShader.cpp
+    src/Kortez/Renderer/OpenGL/OpenGLTexture2D.h
+    src/Kortez/Renderer/OpenGL/OpenGLTexture2D.cpp
 )
 
 add_library(Kortez STATIC)
@@ -51,4 +57,4 @@ target_link_libraries(Kortez glfw)
 target_link_libraries(Kortez glad)
 target_link_libraries(Kortez glm)
 
-target_include_directories(Kortez PUBLIC "src")
+target_include_directories(Kortez PUBLIC "src" "vendor/stb")

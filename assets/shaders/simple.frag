@@ -2,15 +2,17 @@
 
 in vec3 Normal;
 in vec3 FragPos;
+in vec2 TexCoord;
 
 out vec4 FragColor;
 
 uniform vec3 viewPos;
+uniform sampler2D diffuseMap;
 
 void main() {
-	vec3 objectColor = vec3(1.0, 0.5, 0.2);
+	vec3 objectColor = texture(diffuseMap, TexCoord).rgb;
 	vec3 lightColor = vec3(1.0, 1.0, 1.0);
-	vec3 lightPos = vec3(0.0, 0.0, 3.0);
+	vec3 lightPos = vec3(0.0, 3.0, 3.0);
 
 	float ambientStrength = 0.1;
 	vec3 ambient = ambientStrength * lightColor;

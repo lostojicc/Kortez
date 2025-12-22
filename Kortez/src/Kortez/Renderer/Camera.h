@@ -9,7 +9,7 @@ namespace Kortez {
 		glm::mat4 m_Projection{ 1.0f };
 		glm::mat4 m_ViewProjection{ 1.0f };
 
-		glm::vec3 m_Position{ 0.0f, 1.0f, 3.0f };
+		glm::vec3 m_Position{ 5.0f, 5.0f, 5.0f };
 		glm::vec3 m_Target{ 0.0f };
 
 		void RecalculateView();
